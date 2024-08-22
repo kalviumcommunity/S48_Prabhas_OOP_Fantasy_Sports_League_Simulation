@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-// Class for Player 
+// Class for Player (Cricketer)
 class Player {
     String name;
     String role;
@@ -15,7 +13,7 @@ class Player {
         this.wickets = wickets;
     }
 
-    // Method to calculate performance
+    // Method to calculate performance based on runs and wickets
     int calculatePerformance() {
         return (runs * 2) + (wickets * 10); 
     }
@@ -28,45 +26,53 @@ class Player {
     }
 }
 
-// Class for Team
+// Class for Team 
 class Team {
     String teamName;
-    ArrayList<Player> players;
+    Player[] players; 
+    int playerCount;
 
     // Constructor
-    Team(String teamName) {
+    Team(String teamName, int teamSize) {
         this.teamName = teamName;
-        this.players = new ArrayList<>();
+        this.players = new Player[teamSize]; 
+        this.playerCount = 0;
     }
 
     // Method to add a player to the team
     void addPlayer(Player player) {
-        players.add(player);
+        if (playerCount < players.length) {
+            players[playerCount] = player;
+            playerCount++;
+        } else {
+            System.out.println("Team is full. Cannot add more players.");
+        }
     }
 
     // Method to display team information
     void displayTeamInfo() {
         System.out.println("Team: " + teamName);
-        for (Player player : players) {
-            player.displayInfo();
+        for (int i = 0; i < playerCount; i++) {
+            players[i].displayInfo();
         }
     }
 }
 
 public class Main {
     public static void main(String[] args) {
+        Team team = new Team("Mumbai Indians", 3);
+
         // Creating Player objects
-        Player player1 = new Player("Virat Kohli", "Batsman", 175, 0);
-        Player player2 = new Player("Jasprit Bumrah", "Bowler", 10, 3);
+        Player player1 = new Player("Rohit Sharma", "Batsman", 68, 0);
+        Player player2 = new Player("Hardik Pandya", "All-Rounder", 45, 2);
+        Player player3 = new Player("Trent Boult", "Bowler", 10, 4);
 
-        // Creating a Team object
-        Team team1 = new Team("Royal Challengers Banglore");
-
-        // Adding players to the team
-        team1.addPlayer(player1);
-        team1.addPlayer(player2);
+        // Adding players to the team (array of objects)
+        team.addPlayer(player1);
+        team.addPlayer(player2);
+        team.addPlayer(player3);
 
         // Displaying team information
-        team1.displayTeamInfo();
+        team.displayTeamInfo();
     }
 }
