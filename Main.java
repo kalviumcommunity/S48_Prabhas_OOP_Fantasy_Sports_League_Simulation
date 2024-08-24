@@ -1,5 +1,8 @@
 // Class for Player (Cricketer)
 class Player {
+
+    static int totalPlayers = 0; // Static variable to keep track of total players
+
     String name;
     String role;
     int runs;
@@ -11,6 +14,7 @@ class Player {
         this.role = role;
         this.runs = runs;
         this.wickets = wickets;
+        totalPlayers++;
     }
 
     // Method to calculate performance based on runs and wickets
@@ -24,10 +28,17 @@ class Player {
                            + ", Runs: " + runs + ", Wickets: " + wickets 
                            + ", Performance: " + calculatePerformance());
     }
+
+    static void displayTotalPlayers() {
+        System.out.println("Total Players: " + totalPlayers);
+    }
+
 }
 
 // Class for Team 
 class Team {
+    static int totalTeams = 0; // Static variable to keep track of total teams
+
     String teamName;
     Player[] players; 
     int playerCount;
@@ -37,6 +48,7 @@ class Team {
         this.teamName = teamName;
         this.players = new Player[teamSize]; 
         this.playerCount = 0;
+        totalTeams++;
     }
 
     // Method to add a player to the team
@@ -55,6 +67,11 @@ class Team {
         for (int i = 0; i < playerCount; i++) {
             players[i].displayInfo();
         }
+    }
+
+
+    static void displayTotalTeams() {
+        System.out.println("Total Teams: " + totalTeams);
     }
 }
 
@@ -80,5 +97,7 @@ public class Main {
 
         // Displaying team information
         team.displayTeamInfo();
+        Player.displayTotalPlayers(); 
+        Team.displayTotalTeams();
     }
 }
