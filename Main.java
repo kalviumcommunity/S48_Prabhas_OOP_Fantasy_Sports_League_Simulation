@@ -3,10 +3,10 @@ class Player {
 
     static int totalPlayers = 0; // Static variable to keep track of total players
 
-    String name;
-    String role;
-    int runs;
-    int wickets;
+    private String name; 
+    private String role;  
+    private int runs;     
+    private int wickets;  
 
     // Constructor
     Player(String name, String role, int runs, int wickets) {
@@ -74,9 +74,10 @@ class Player {
 class Team {
     static int totalTeams = 0; // Static variable to keep track of total teams
 
-    String teamName;
-    Player[] players; 
-    int playerCount;
+    private String teamName;   
+    private Player[] players;  
+    private int playerCount;
+
 
     // Constructor
     Team(String teamName, int teamSize) {
