@@ -8,13 +8,25 @@ class Player {
     private int runs;     
     private int wickets;  
 
-    // Constructor
+
+    // Default constructor (no parameters)
+    public Player() {
+        this.name = "Unknown";
+        this.role = "Unknown";
+        this.runs = 0;
+        this.wickets = 0;
+        System.out.println("Default constructor called");
+    }
+
+    // Parameterized  Constructor
     Player(String name, String role, int runs, int wickets) {
         this.name = name;
         this.role = role;
         this.runs = runs;
         this.wickets = wickets;
         totalPlayers++;
+        System.out.println("Parameterized constructor called for " + name);
+
     }
 
     // Accessors (Getters)
@@ -171,10 +183,15 @@ public class Main {
          Team[] teams = {team1, team2};
          Team.displayAllTeams(teams);
 
+          // Using default constructor
+        Player player8 = new Player();
+        player8.displayInfo();
+
 
 
         System.out.println("\nUpdating Hardik Pandya's runs...");
         player2.setRuns(50); // Modifying runs using setter
+        player1.displayInfo();
         player2.displayInfo(); // Display updated info
     }
 }
