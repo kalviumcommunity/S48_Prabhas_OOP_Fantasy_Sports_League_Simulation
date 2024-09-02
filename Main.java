@@ -17,6 +17,41 @@ class Player {
         totalPlayers++;
     }
 
+    // Accessors (Getters)
+    public String getName() {
+        return name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public int getRuns() {
+        return runs;
+    }
+
+    public int getWickets() {
+        return wickets;
+    }
+
+    // Mutators (Setters)
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setRuns(int runs) {
+        this.runs = runs;
+    }
+
+    public void setWickets(int wickets) {
+        this.wickets = wickets;
+    }
+
+
     // Method to calculate performance based on runs and wickets
     int calculatePerformance() {
         return (runs * 2) + (wickets * 10); 
@@ -50,6 +85,23 @@ class Team {
         this.playerCount = 0;
         totalTeams++;
     }
+
+
+
+     // Accessors (Getters)
+     public String getTeamName() {
+        return teamName;
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
+
+    // Mutators (Setters)
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
 
     // Method to add a player to the team
     void addPlayer(Player player) {
@@ -108,7 +160,7 @@ public class Main {
         team2.addPlayer(player4);
         team2.addPlayer(player5);
         team2.addPlayer(player6);
-
+ 
 
         // Displaying static information
         Player.displayTotalPlayers(); 
@@ -117,5 +169,11 @@ public class Main {
          // Displaying information of all teams using static method
          Team[] teams = {team1, team2};
          Team.displayAllTeams(teams);
+
+
+
+        System.out.println("\nUpdating Hardik Pandya's runs...");
+        player2.setRuns(50); // Modifying runs using setter
+        player2.displayInfo(); // Display updated info
     }
 }
