@@ -1,6 +1,6 @@
-// Abstract class for Player (Cricketer)
+// Abstract class for Player
 abstract class Player {
-    static int totalPlayers = 0; // Static variable to keep track of total players
+    static int totalPlayers = 0; 
 
     protected String name;
     protected String role;
@@ -20,7 +20,7 @@ abstract class Player {
     // Abstract method to be implemented by subclasses
     abstract int calculatePerformance();
 
-    // Method to display player information
+    // Virtual method to display player information
     void displayInfo() {
         System.out.println("Player: " + name + ", Role: " + role + ", Runs: " + runs + ", Wickets: " + wickets + ", Performance: " + calculatePerformance());
     }
@@ -162,8 +162,8 @@ public class Main {
         Team[] teams = {team1, team2};
         Team.displayAllTeams(teams);
 
-        // Demonstrate method overloading
-        System.out.println("\nDemonstrating Method Overloading:");
+        // Demonstrate abstract class and virtual function
+        System.out.println("\nDemonstrating Abstract Class and Virtual Function:");
         Player player7 = new Batsman("Shikhar Dhawan", 100);
         Player player8 = new Bowler("Rashid Khan", 5);
 
