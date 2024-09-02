@@ -7,7 +7,7 @@ abstract class Player {
     protected int runs;
     protected int wickets;
 
-    // Constructor
+    // Parameterized Constructor
     public Player(String name, String role, int runs, int wickets) {
         this.name = name;
         this.role = role;
@@ -15,40 +15,6 @@ abstract class Player {
         this.wickets = wickets;
         totalPlayers++;
         System.out.println("Parameterized constructor called for " + name);
-    }
-
-    // Accessors (Getters)
-    public String getName() {
-        return name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public int getRuns() {
-        return runs;
-    }
-
-    public int getWickets() {
-        return wickets;
-    }
-
-    // Mutators (Setters)
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setRuns(int runs) {
-        this.runs = runs;
-    }
-
-    public void setWickets(int wickets) {
-        this.wickets = wickets;
     }
 
     // Abstract method to be implemented by subclasses
@@ -195,5 +161,13 @@ public class Main {
         // Displaying information of all teams using static method
         Team[] teams = {team1, team2};
         Team.displayAllTeams(teams);
+
+        // Demonstrate method overloading
+        System.out.println("\nDemonstrating Method Overloading:");
+        Player player7 = new Batsman("Shikhar Dhawan", 100);
+        Player player8 = new Bowler("Rashid Khan", 5);
+
+        player7.displayInfo();
+        player8.displayInfo();
     }
 }
