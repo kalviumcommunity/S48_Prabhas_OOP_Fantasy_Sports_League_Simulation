@@ -1,9 +1,9 @@
-// Abstract Class Player
- abstract class Player {
+import java.util.ArrayList;
+
+// Abstract Player class
+abstract class Player {
     private String name;
     private String role;
-
-    // Static field to track total players
     private static int totalPlayers = 0;
 
     public Player(String name, String role) {
@@ -12,22 +12,21 @@
         totalPlayers++;
     }
 
+    // Abstract method for calculating performance, to be implemented by subclasses
     public abstract double calculatePerformance();
 
+    // Display player information
     public void displayInfo() {
-        System.out.println("Player: " + name + ", Role: " + role + ", Performance: " + calculatePerformance());
+        System.out.println(role + ": " + name);
     }
 
+    // Static method to display total players
     public static void displayTotalPlayers() {
         System.out.println("Total Players: " + totalPlayers);
     }
-
-    public String getName() {
-        return name;
-    }
 }
 
-// Subclass Batsman
+// Batsman class extends Player
 class Batsman extends Player {
     private int runs;
 
@@ -38,11 +37,11 @@ class Batsman extends Player {
 
     @Override
     public double calculatePerformance() {
-        return runs * 1.5; 
+        return runs * 1.5;
     }
 }
 
-// Subclass Bowler
+// Bowler class extends Player
 class Bowler extends Player {
     private int wickets;
 
@@ -53,74 +52,74 @@ class Bowler extends Player {
 
     @Override
     public double calculatePerformance() {
-        return wickets * 2.0; 
+        return wickets * 2.0;
     }
 }
 
-// Subclass AllRounder
+// AllRounder class extends Player
 class AllRounder extends Player {
     private int runs;
     private int wickets;
 
     public AllRounder(String name, int runs, int wickets) {
-        super(name, "All-Rounder");
+        super(name, "AllRounder");
         this.runs = runs;
         this.wickets = wickets;
     }
 
     @Override
     public double calculatePerformance() {
-        return (runs * 1.2) + (wickets * 2.5);
+        return (runs * 1.5) + (wickets * 2.0);
     }
 }
 
-// Class Team
+// Team class to manage players
 class Team {
     private String teamName;
-    private Player[] players;
-    private int playerCount;
-
-    // Static field to track total teams
-    private static int totalTeams = 0;
+    private int maxPlayers;
+    private ArrayList<Player> players;
 
     public Team(String teamName, int maxPlayers) {
         this.teamName = teamName;
-        this.players = new Player[maxPlayers];
-        this.playerCount = 0;
-        totalTeams++;
+        this.maxPlayers = maxPlayers;
+        this.players = new ArrayList<>();
     }
 
+    // Add player to the team
     public void addPlayer(Player player) {
-        if (playerCount < players.length) {
-            players[playerCount++] = player;
+        if (players.size() < maxPlayers) {
+            players.add(player);
         } else {
-            System.out.println("Team " + teamName + " is full.");
+            System.out.println("Cannot add more players to the team.");
         }
     }
 
+    // Display team information and player performance
     public void displayTeamInfo() {
         System.out.println("Team: " + teamName);
-        for (int i = 0; i < playerCount; i++) {
-            players[i].displayInfo();
+        for (Player player : players) {
+            player.displayInfo();
+            System.out.println("Performance: " + player.calculatePerformance());
         }
     }
 
-    public static void displayTotalTeams() {
-        System.out.println("Total Teams: " + totalTeams);
-    }
-
+    // Static method to display all teams
     public static void displayAllTeams(Team[] teams) {
-        System.out.println("\nDisplaying Information of All Teams:");
         for (Team team : teams) {
             team.displayTeamInfo();
-            System.out.println();
         }
+    }
+
+    // Static method to display total teams
+    public static void displayTotalTeams(Team[] teams) {
+        System.out.println("Total Teams: " + teams.length);
     }
 }
 
-// Main Class
+// Main class to test the implementation
 public class Main {
     public static void main(String[] args) {
+
         // Creating two teams
         Team team1 = new Team("Royal Challengers Bengaluru", 3);
         Team team2 = new Team("Mumbai Indians", 3);
@@ -145,7 +144,7 @@ public class Main {
 
         // Displaying static information
         Player.displayTotalPlayers();
-        Team.displayTotalTeams();
+        Team.displayTotalTeams(new Team[]{team1, team2});
 
         // Displaying information of all teams using static method
         Team[] teams = {team1, team2};
