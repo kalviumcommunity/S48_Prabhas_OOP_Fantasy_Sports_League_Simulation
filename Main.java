@@ -1,115 +1,103 @@
-// Abstract class for Player
-abstract class Player {
-    static int totalPlayers = 0; 
+// Abstract Class Player
+ abstract class Player {
+    private String name;
+    private String role;
 
-    protected String name;
-    protected String role;
-    protected int runs;
-    protected int wickets;
+    // Static field to track total players
+    private static int totalPlayers = 0;
 
-    // Parameterized Constructor
-    public Player(String name, String role, int runs, int wickets) {
+    public Player(String name, String role) {
         this.name = name;
         this.role = role;
-        this.runs = runs;
-        this.wickets = wickets;
         totalPlayers++;
-        System.out.println("Parameterized constructor called for " + name);
     }
 
-    // Abstract method to be implemented by subclasses
-    abstract int calculatePerformance();
+    public abstract double calculatePerformance();
 
-    // Virtual method to display player information
-    void displayInfo() {
-        System.out.println("Player: " + name + ", Role: " + role + ", Runs: " + runs + ", Wickets: " + wickets + ", Performance: " + calculatePerformance());
+    public void displayInfo() {
+        System.out.println("Player: " + name + ", Role: " + role + ", Performance: " + calculatePerformance());
     }
 
-    static void displayTotalPlayers() {
+    public static void displayTotalPlayers() {
         System.out.println("Total Players: " + totalPlayers);
     }
+
+    public String getName() {
+        return name;
+    }
 }
 
-// Class for Batsman that extends Player
+// Subclass Batsman
 class Batsman extends Player {
+    private int runs;
+
     public Batsman(String name, int runs) {
-        super(name, "Batsman", runs, 0);
+        super(name, "Batsman");
+        this.runs = runs;
     }
 
-    // Implementing the abstract method for calculating performance
     @Override
-    int calculatePerformance() {
-        return runs * 2;
+    public double calculatePerformance() {
+        return runs * 1.5; 
     }
 }
 
-// Class for Bowler that extends Player
+// Subclass Bowler
 class Bowler extends Player {
+    private int wickets;
+
     public Bowler(String name, int wickets) {
-        super(name, "Bowler", 0, wickets);
+        super(name, "Bowler");
+        this.wickets = wickets;
     }
 
-    // Implementing the abstract method for calculating performance
     @Override
-    int calculatePerformance() {
-        return wickets * 10;
+    public double calculatePerformance() {
+        return wickets * 2.0; 
     }
 }
 
-// Class for All-Rounder that extends Player
+// Subclass AllRounder
 class AllRounder extends Player {
+    private int runs;
+    private int wickets;
+
     public AllRounder(String name, int runs, int wickets) {
-        super(name, "All-Rounder", runs, wickets);
+        super(name, "All-Rounder");
+        this.runs = runs;
+        this.wickets = wickets;
     }
 
-    // Implementing the abstract method for calculating performance
     @Override
-    int calculatePerformance() {
-        return (runs * 2) + (wickets * 10);
+    public double calculatePerformance() {
+        return (runs * 1.2) + (wickets * 2.5);
     }
 }
 
-// Class for Team
+// Class Team
 class Team {
-    static int totalTeams = 0; // Static variable to keep track of total teams
-
     private String teamName;
     private Player[] players;
     private int playerCount;
 
-    // Constructor
-    public Team(String teamName, int teamSize) {
+    // Static field to track total teams
+    private static int totalTeams = 0;
+
+    public Team(String teamName, int maxPlayers) {
         this.teamName = teamName;
-        this.players = new Player[teamSize];
+        this.players = new Player[maxPlayers];
         this.playerCount = 0;
         totalTeams++;
     }
 
-    // Accessors (Getters)
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public int getPlayerCount() {
-        return playerCount;
-    }
-
-    // Mutators (Setters)
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    // Method to add a player to the team
     public void addPlayer(Player player) {
         if (playerCount < players.length) {
-            players[playerCount] = player;
-            playerCount++;
+            players[playerCount++] = player;
         } else {
-            System.out.println("Team is full. Cannot add more players.");
+            System.out.println("Team " + teamName + " is full.");
         }
     }
 
-    // Method to display team information
     public void displayTeamInfo() {
         System.out.println("Team: " + teamName);
         for (int i = 0; i < playerCount; i++) {
@@ -117,21 +105,22 @@ class Team {
         }
     }
 
-    static void displayTotalTeams() {
+    public static void displayTotalTeams() {
         System.out.println("Total Teams: " + totalTeams);
     }
 
-    static void displayAllTeams(Team[] teams) {
-        System.out.println("Displaying all teams:");
+    public static void displayAllTeams(Team[] teams) {
+        System.out.println("\nDisplaying Information of All Teams:");
         for (Team team : teams) {
             team.displayTeamInfo();
+            System.out.println();
         }
     }
 }
 
+// Main Class
 public class Main {
     public static void main(String[] args) {
-
         // Creating two teams
         Team team1 = new Team("Royal Challengers Bengaluru", 3);
         Team team2 = new Team("Mumbai Indians", 3);
