@@ -37,7 +37,7 @@ class Batsman extends Player {
 
     @Override
     public double calculatePerformance() {
-        return runs * 1.5;
+        return runs * 1.5;  // Example calculation for Batsman
     }
 }
 
@@ -52,7 +52,7 @@ class Bowler extends Player {
 
     @Override
     public double calculatePerformance() {
-        return wickets * 2.0;
+        return wickets * 2.0;  // Example calculation for Bowler
     }
 }
 
@@ -69,7 +69,7 @@ class AllRounder extends Player {
 
     @Override
     public double calculatePerformance() {
-        return (runs * 1.5) + (wickets * 2.0);
+        return (runs * 1.5) + (wickets * 2.0);  // Example calculation for AllRounder
     }
 }
 
@@ -98,7 +98,7 @@ class Team {
     public void displayTeamInfo() {
         System.out.println("Team: " + teamName);
         for (Player player : players) {
-            player.displayInfo();
+            player.displayInfo();  // Polymorphism in action
             System.out.println("Performance: " + player.calculatePerformance());
         }
     }
@@ -155,7 +155,7 @@ public class Main {
         Player player7 = new Batsman("Shikhar Dhawan", 100);
         Player player8 = new Bowler("Rashid Khan", 5);
 
-        player7.displayInfo();
-        player8.displayInfo();
+        player7.displayInfo();  // Polymorphism: Batsman
+        player8.displayInfo();  // Polymorphism: Bowler
     }
 }
